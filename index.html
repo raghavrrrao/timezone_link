@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TimeZone Link - Futuristic Time Zone Converter</title>
+    <link rel="stylesheet" href="css/main.css">
+    
+</head>
+
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="container">
+        <header>
+            <h1>⏳ TimeZone Link</h1>
+            <p class="subtitle">The future of time zone conversion. Create smart event links that automatically adapt to
+                each viewer's local time.</p>
+        </header>
+
+        <div id="creator-view">
+            <div class="card">
+                <h2>CREATE TIMEZONE LINK</h2>
+                <p style="color: var(--text-muted); margin-bottom: 25px;">Enter your event details to generate a
+                    futuristic timezone-aware shareable link.</p>
+
+                <div class="form-group">
+                    <label for="event-title">EVENT TITLE</label>
+                    <input type="text" id="event-title" placeholder="e.g., Team Sync, Product Launch">
+                </div>
+
+                <div class="form-group">
+                    <label for="event-date">DATE & TIME</label>
+                    <input type="datetime-local" id="event-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="timezone">ORIGINAL TIME ZONE</label>
+                    <select id="timezone" required>
+                        <option value="">Select your timezone</option>
+                        <!-- Timezones will be populated by JavaScript -->
+                    </select>
+                </div>
+
+                <button id="generate-btn" class="glow">GENERATE SMART LINK</button>
+
+                <div id="result-container" class="result-container">
+                    <div class="result-card">
+                        <div class="result-title">LINK GENERATED SUCCESSFULLY</div>
+                        <div class="result-url" id="generated-url">https://timezone.link/cyb3r-t1m3</div>
+                        <p style="color: var(--text-muted);">Share this link anywhere - viewers will automatically see
+                            the correct time in their timezone.</p>
+                        <div class="action-buttons">
+                            <button id="copy-btn" class="btn-copy">COPY LINK</button>
+                            <button id="share-btn" class="btn-share">SHARE</button>
+                        </div>
+                    </div>
+
+                    <div class="qr-container">
+                        <p style="color: var(--text-muted); margin-bottom: 20px;">SCAN TO SHARE</p>
+                        <div id="qr-code" class="qr-code">
+                            <!-- QR code will be generated here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="event-view" class="event-display">
+            <h2 class="event-title" id="display-event-title">VIRTUAL MEETING</h2>
+            <div class="event-time" id="display-event-time">JUNE 15, 3:00 PM</div>
+            <div class="timezone-info">
+                <span id="original-timezone">(Originally scheduled for 3:00 PM Pacific Time)</span>
+                <br>
+                <span id="your-timezone">Displayed in your detected timezone: Asia/Kolkata (IST)</span>
+            </div>
+
+            <div class="calendar-buttons">
+                <a href="#" id="google-cal-btn" class="calendar-btn btn-google">
+                    <span>ADD TO GOOGLE CALENDAR</span>
+                </a>
+                <a href="#" id="outlook-cal-btn" class="calendar-btn btn-outlook">
+                    <span>ADD TO OUTLOOK</span>
+                </a>
+                <a href="#" id="apple-cal-btn" class="calendar-btn btn-apple">
+                    <span>ADD TO APPLE CALENDAR</span>
+                </a>
+            </div>
+
+            <div class="qr-container" style="margin-top: 60px;">
+                <p style="color: var(--text-muted); margin-bottom: 20px;">SHARE THIS EVENT</p>
+                <div id="event-qr-code" class="qr-code"></div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <h3 class="feature-title">GLOBAL TIME INTELLIGENCE</h3>
+                <p>Our system automatically detects each viewer's timezone and converts the event time instantly,
+                    eliminating confusion across borders.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">LIGHTNING FAST</h3>
+                <p>Built with cutting-edge web technologies for instantaneous time conversions without page reloads or
+                    delays.</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔗</div>
+                <h3 class="feature-title">UNIVERSAL COMPATIBILITY</h3>
+                <p>Works seamlessly across all devices, browsers, and calendar platforms with our optimized integration
+                    system.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 TimeZone Link | The Future of Time Coordination</p>
+    </footer>
+
+    <!-- QR Code library -->
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script type="module" src="js/script.js"></script>
+
+</body>
+
+</html>
