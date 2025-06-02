@@ -74,7 +74,8 @@ function showCreatorView() {
 
     // Set default timezone to user's timezone
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.getElementById('timezone').value = userTimezone;
+    // Use modern timezone name if available
+    document.getElementById('timezone').value = userTimezone === 'Asia/Calcutta' ? 'Asia/Kolkata' : userTimezone;
 
     // Generate button event
     document.getElementById('generate-btn').addEventListener('click', generateLink);
@@ -90,7 +91,13 @@ function populateTimezones() {
     const timezoneSelect = document.getElementById('timezone');
     const timezones = Intl.supportedValuesOf('timeZone');
 
-    timezones.sort().forEach(tz => {
+    // Filter and modernize timezone names
+    const modernTimezones = timezones.map(tz => {
+        if (tz === 'Asia/Calcutta') return 'Asia/Kolkata';
+        return tz;
+    }).sort();
+
+    modernTimezones.forEach(tz => {
         const option = document.createElement('option');
         option.value = tz;
 
@@ -207,9 +214,12 @@ function showEventView(hashParams) {
         // Decode the event data
         const eventData = JSON.parse(atob(eventDataStr));
 
-        // Get the original date and timezone
-        const originalDate = new Date(eventData.d);
-        const originalTimezone = eventData.z;
+        // Get the original date and timezone (using modern name)
+        const originalTimezone = eventData.z === 'Asia/Calcutta' ? 'Asia/Kolkata' : eventData.z;
+        
+        // Create date object properly accounting for timezone
+        const dateString = eventData.d.includes('Z') ? eventData.d : eventData.d + 'Z';
+        const originalDate = new Date(dateString);
 
         // Format the original time
         const originalTimeStr = formatFuturisticDateTime(originalDate, originalTimezone);
@@ -248,6 +258,11 @@ function showEventView(hashParams) {
 }
 
 function formatFuturisticDateTime(date, timezone, originalTimezone = null) {
+    // Ensure we're working with a valid date
+    if (isNaN(date.getTime())) {
+        return { formatted: 'INVALID DATE', timezoneAbbr: 'ERR' };
+    }
+
     const options = {
         weekday: 'short',
         year: 'numeric',
