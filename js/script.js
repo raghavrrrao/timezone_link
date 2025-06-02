@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Create floating particles
+    // Theme toggle functionality
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('change', function () {
+        if (this.checked) {
+            document.documentElement.classList.add('light-theme');
+            // Change particles color to red
+            document.querySelectorAll('.particle').forEach(particle => {
+                particle.style.background = 'var(--primary-color)';
+            });
+        } else {
+            document.documentElement.classList.remove('light-theme');
+            // Change particles back to original color
+            document.querySelectorAll('.particle').forEach(particle => {
+                particle.style.background = 'var(--primary-color)';
+            });
+        }
+    });
     createParticles();
 
     // Check if this is an event view (has hash parameters)
